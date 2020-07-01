@@ -122,6 +122,8 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * @see org.springframework.core.env.Environment#resolveRequiredPlaceholders(String)
 	 */
 	protected String resolvePath(String path) {
+		// 将占位符解析成实际的地址
+		// 比如将 classpath:config.xml 解析成具体的路径
 		return getEnvironment().resolveRequiredPlaceholders(path);
 	}
 

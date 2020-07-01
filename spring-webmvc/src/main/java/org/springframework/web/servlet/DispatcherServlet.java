@@ -500,13 +500,20 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * <p>May be overridden in subclasses in order to initialize further strategy objects.
 	 */
 	protected void initStrategies(ApplicationContext context) {
+		// 文件上传
 		initMultipartResolver(context);
+		// 国际化
 		initLocaleResolver(context);
+		// 主题
 		initThemeResolver(context);
+		// url mapping
 		initHandlerMappings(context);
+		// 并不只是支持 controller 一种，还支持其他 handler
 		initHandlerAdapters(context);
+		// 标准异常处理
 		initHandlerExceptionResolvers(context);
 		initRequestToViewNameTranslator(context);
+		// view
 		initViewResolvers(context);
 		initFlashMapManager(context);
 	}
@@ -1013,6 +1020,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
+				// 根据 request 获取 executionChain，executionChain 中包含interceptors 和 handler
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
 					noHandlerFound(processedRequest, response);

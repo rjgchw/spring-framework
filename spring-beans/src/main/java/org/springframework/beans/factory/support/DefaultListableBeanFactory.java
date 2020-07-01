@@ -457,6 +457,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			return namedBean.getBeanInstance();
 		}
 		BeanFactory parent = getParentBeanFactory();
+		// 如果存在父容器并且此 bean的定义在父容器中，交由父容器初始化
 		if (parent instanceof DefaultListableBeanFactory) {
 			return ((DefaultListableBeanFactory) parent).resolveBean(requiredType, args, nonUniqueAsNull);
 		}
